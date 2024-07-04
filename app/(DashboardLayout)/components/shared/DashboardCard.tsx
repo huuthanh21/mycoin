@@ -1,71 +1,71 @@
+import { Box, Card, CardContent, Stack, Typography } from "@mui/material";
 import React from "react";
-import { Card, CardContent, Typography, Stack, Box } from "@mui/material";
 
 type Props = {
-  title?: string;
-  subtitle?: string;
-  action?: JSX.Element | any;
-  footer?: JSX.Element;
-  cardheading?: string | JSX.Element;
-  headtitle?: string | JSX.Element;
-  headsubtitle?: string | JSX.Element;
-  children?: JSX.Element;
-  middlecontent?: string | JSX.Element;
+	action?: JSX.Element | any;
+	cardheading?: JSX.Element | string;
+	children?: JSX.Element;
+	footer?: JSX.Element;
+	headsubtitle?: JSX.Element | string;
+	headtitle?: JSX.Element | string;
+	middlecontent?: JSX.Element | string;
+	subtitle?: string;
+	title?: string;
 };
 
 const DashboardCard = ({
-  title,
-  subtitle,
-  children,
-  action,
-  footer,
-  cardheading,
-  headtitle,
-  headsubtitle,
-  middlecontent,
+	action,
+	cardheading,
+	children,
+	footer,
+	headsubtitle,
+	headtitle,
+	middlecontent,
+	subtitle,
+	title,
 }: Props) => {
-  return (
-    <Card sx={{ padding: 0 }} elevation={9} variant={undefined}>
-      {cardheading ? (
-        <CardContent>
-          <Typography variant="h5">{headtitle}</Typography>
-          <Typography variant="subtitle2" color="textSecondary">
-            {headsubtitle}
-          </Typography>
-        </CardContent>
-      ) : (
-        <CardContent sx={{ p: "30px" }}>
-          {title ? (
-            <Stack
-              direction="row"
-              spacing={2}
-              justifyContent="space-between"
-              alignItems={"center"}
-              mb={3}
-            >
-              <Box>
-                {title ? <Typography variant="h5">{title}</Typography> : ""}
+	return (
+		<Card elevation={9} sx={{ padding: 0 }} variant={undefined}>
+			{cardheading ? (
+				<CardContent>
+					<Typography variant="h5">{headtitle}</Typography>
+					<Typography color="textSecondary" variant="subtitle2">
+						{headsubtitle}
+					</Typography>
+				</CardContent>
+			) : (
+				<CardContent sx={{ p: "30px" }}>
+					{title ? (
+						<Stack
+							alignItems={"center"}
+							direction="row"
+							justifyContent="space-between"
+							mb={3}
+							spacing={2}
+						>
+							<Box>
+								{title ? <Typography variant="h5">{title}</Typography> : ""}
 
-                {subtitle ? (
-                  <Typography variant="subtitle2" color="textSecondary">
-                    {subtitle}
-                  </Typography>
-                ) : (
-                  ""
-                )}
-              </Box>
-              {action}
-            </Stack>
-          ) : null}
+								{subtitle ? (
+									<Typography color="textSecondary" variant="subtitle2">
+										{subtitle}
+									</Typography>
+								) : (
+									""
+								)}
+							</Box>
+							{action}
+						</Stack>
+					) : null}
 
-          {children}
-        </CardContent>
-      )}
+					{children}
+				</CardContent>
+			)}
 
-      {middlecontent}
-      {footer}
-    </Card>
-  );
+			{middlecontent}
+			{footer}
+		</Card>
+	);
 };
 
 export default DashboardCard;

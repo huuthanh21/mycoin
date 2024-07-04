@@ -1,46 +1,75 @@
-import React from 'react';
-import { Box, Typography, Button } from '@mui/material';
-import Link  from 'next/link';
-
-import CustomTextField from '@/app/(DashboardLayout)/components/forms/theme-elements/CustomTextField';
-import { Stack } from '@mui/system';
+import CustomTextField from "@/app/(DashboardLayout)/components/forms/theme-elements/CustomTextField";
+import { Box, Button, Typography } from "@mui/material";
+import { Stack } from "@mui/system";
+import Link from "next/link";
+import React from "react";
 
 interface registerType {
-    title?: string;
-    subtitle?: JSX.Element | JSX.Element[];
-    subtext?: JSX.Element | JSX.Element[];
-  }
+	subtext?: JSX.Element | JSX.Element[];
+	subtitle?: JSX.Element | JSX.Element[];
+	title?: string;
+}
 
-const AuthRegister = ({ title, subtitle, subtext }: registerType) => (
-    <>
-        {title ? (
-            <Typography fontWeight="700" variant="h2" mb={1}>
-                {title}
-            </Typography>
-        ) : null}
+const AuthRegister = ({ subtext, subtitle, title }: registerType) => (
+	<>
+		{title ? (
+			<Typography fontWeight="700" mb={1} variant="h2">
+				{title}
+			</Typography>
+		) : null}
 
-        {subtext}
+		{subtext}
 
-        <Box>
-            <Stack mb={3}>
-                <Typography variant="subtitle1"
-                    fontWeight={600} component="label" htmlFor='name' mb="5px">Name</Typography>
-                <CustomTextField id="name" variant="outlined" fullWidth />
+		<Box>
+			<Stack mb={3}>
+				<Typography
+					component="label"
+					fontWeight={600}
+					htmlFor="name"
+					mb="5px"
+					variant="subtitle1"
+				>
+					Name
+				</Typography>
+				<CustomTextField fullWidth id="name" variant="outlined" />
 
-                <Typography variant="subtitle1"
-                    fontWeight={600} component="label" htmlFor='email' mb="5px" mt="25px">Email Address</Typography>
-                <CustomTextField id="email" variant="outlined" fullWidth />
+				<Typography
+					component="label"
+					fontWeight={600}
+					htmlFor="email"
+					mb="5px"
+					mt="25px"
+					variant="subtitle1"
+				>
+					Email Address
+				</Typography>
+				<CustomTextField fullWidth id="email" variant="outlined" />
 
-                <Typography variant="subtitle1"
-                    fontWeight={600} component="label" htmlFor='password' mb="5px" mt="25px">Password</Typography>
-                <CustomTextField id="password" variant="outlined" fullWidth />
-            </Stack>
-            <Button color="primary" variant="contained" size="large" fullWidth component={Link} href="/authentication/login">
-                Sign Up
-            </Button>
-        </Box>
-        {subtitle}
-    </>
+				<Typography
+					component="label"
+					fontWeight={600}
+					htmlFor="password"
+					mb="5px"
+					mt="25px"
+					variant="subtitle1"
+				>
+					Password
+				</Typography>
+				<CustomTextField fullWidth id="password" variant="outlined" />
+			</Stack>
+			<Button
+				color="primary"
+				component={Link}
+				fullWidth
+				href="/authentication/login"
+				size="large"
+				variant="contained"
+			>
+				Sign Up
+			</Button>
+		</Box>
+		{subtitle}
+	</>
 );
 
 export default AuthRegister;
