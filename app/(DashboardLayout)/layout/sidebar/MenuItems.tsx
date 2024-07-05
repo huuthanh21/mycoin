@@ -1,15 +1,24 @@
 import {
 	IconAperture,
+	IconBrandTelegram,
+	IconChartHistogram,
 	IconCopy,
-	IconLayoutDashboard,
+	IconHistory,
 	IconLogin,
 	IconMoodHappy,
 	IconTypography,
 	IconUserPlus,
+	IconWallet,
 } from "@tabler/icons-react";
 import { uniqueId } from "lodash";
 
 const Menuitems = [
+	{
+		href: "/wallet/create",
+		icon: IconWallet,
+		id: uniqueId(),
+		title: "Create Wallet",
+	},
 	{
 		navlabel: true,
 		subheader: "Home",
@@ -17,10 +26,23 @@ const Menuitems = [
 
 	{
 		href: "/",
-		icon: IconLayoutDashboard,
+		icon: IconChartHistogram,
 		id: uniqueId(),
-		title: "Dashboard",
+		title: "Portfolio",
 	},
+	{
+		href: "/wallet/send",
+		icon: IconBrandTelegram,
+		id: uniqueId(),
+		title: "Send",
+	},
+	{
+		href: "/wallet/transactions",
+		icon: IconHistory,
+		id: uniqueId(),
+		title: "Transactions",
+	},
+
 	{
 		navlabel: true,
 		subheader: "Utilities",

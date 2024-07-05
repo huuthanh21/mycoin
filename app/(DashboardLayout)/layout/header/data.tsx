@@ -1,7 +1,3 @@
-import img1 from "src/assets/images/profile/user-1.jpg";
-import img2 from "src/assets/images/profile/user-2.jpg";
-import img3 from "src/assets/images/profile/user-3.jpg";
-import img4 from "src/assets/images/profile/user-4.jpg";
 import icon1 from "src/assets/images/svgs/icon-account.svg";
 import ddIcon8 from "src/assets/images/svgs/icon-dd-application.svg";
 import ddIcon2 from "src/assets/images/svgs/icon-dd-cart.svg";
@@ -13,52 +9,6 @@ import ddIcon7 from "src/assets/images/svgs/icon-dd-message-box.svg";
 import ddIcon5 from "src/assets/images/svgs/icon-dd-mobile.svg";
 import icon2 from "src/assets/images/svgs/icon-inbox.svg";
 import icon3 from "src/assets/images/svgs/icon-tasks.svg";
-
-//
-// Notifications dropdown
-//
-const notifications = [
-	{
-		avatar: img1,
-		subtitle: "Congratulate him",
-		title: "Roman Joined the Team!",
-	},
-	{
-		avatar: img2,
-		subtitle: "Salma sent you new message",
-		title: "New message received",
-	},
-	{
-		avatar: img3,
-		subtitle: "Check your earnings",
-		title: "New Payment received",
-	},
-	{
-		avatar: img4,
-		subtitle: "Assign her new tasks",
-		title: "Jolly completed tasks",
-	},
-	{
-		avatar: img1,
-		subtitle: "Congratulate him",
-		title: "Roman Joined the Team!",
-	},
-	{
-		avatar: img2,
-		subtitle: "Salma sent you new message",
-		title: "New message received",
-	},
-	{
-		avatar: img3,
-		subtitle: "Check your earnings",
-		title: "New Payment received",
-	},
-	{
-		avatar: img4,
-		subtitle: "Assign her new tasks",
-		title: "Jolly completed tasks",
-	},
-];
 
 //
 // Profile dropdown
@@ -172,4 +122,4 @@ const pageLinks = [
 	},
 ];
 
-export { appsLink, notifications, pageLinks, profile };
+export { appsLink, pageLinks, profile };
