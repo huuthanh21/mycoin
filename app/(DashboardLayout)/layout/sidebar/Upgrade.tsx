@@ -19,7 +19,7 @@ export const Upgrade = () => {
 						sx={{ width: "80px" }}
 						variant="h5"
 					>
-						Haven&apos;t account ?
+						Haven&apos;t wallet?
 					</Typography>
 					<Button
 						aria-label="logout"
@@ -31,7 +31,7 @@ export const Upgrade = () => {
 						target="_blank"
 						variant="contained"
 					>
-						Sign Up
+						Create
 					</Button>
 				</Box>
 				<Box mt="-35px">
