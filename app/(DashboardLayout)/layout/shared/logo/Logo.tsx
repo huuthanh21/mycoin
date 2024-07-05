@@ -16,7 +16,7 @@ const Logo = () => {
 				alt="logo"
 				height={70}
 				priority
-				src="/images/logos/dark-logo.svg"
+				src="/images/logos/mycoin-logo.svg"
 				width={174}
 			/>
 		</LinkStyled>
