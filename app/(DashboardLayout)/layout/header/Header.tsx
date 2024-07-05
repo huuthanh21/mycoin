@@ -55,17 +55,6 @@ const Header = ({ toggleMobileSidebar }: ItemType) => {
 					<IconMenu height="20" width="20" />
 				</IconButton>
 
-				<IconButton
-					aria-controls="msgs-menu"
-					aria-haspopup="true"
-					aria-label="show 11 new notifications"
-					color="inherit"
-					size="large"
-				>
-					<Badge color="primary" variant="dot">
-						<IconBellRinging size="21" stroke="1.5" />
-					</Badge>
-				</IconButton>
 				<Box flexGrow={1} />
 				<Stack alignItems="center" direction="row" spacing={1}>
 					<Button
