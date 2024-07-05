@@ -4,14 +4,14 @@ import PageContainer from "@/app/(DashboardLayout)/components/container/PageCont
 import DashboardCard from "@/app/(DashboardLayout)/components/shared/DashboardCard";
 import { Typography } from "@mui/material";
 
-const PortfolioPage = () => {
+const SendPage = () => {
 	return (
-		<PageContainer description="this is Portfolio page" title="Portfolio">
-			<DashboardCard title="Portfolio">
-				<Typography>This is a Portfolio page</Typography>
+		<PageContainer description="this is Send page" title="Send Coin">
+			<DashboardCard title="Send Coin">
+				<Typography>This is a Send page</Typography>
 			</DashboardCard>
 		</PageContainer>
 	);
 };
 
-export default PortfolioPage;
+export default SendPage;
