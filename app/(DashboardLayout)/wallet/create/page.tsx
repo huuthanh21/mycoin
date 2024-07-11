@@ -42,7 +42,7 @@ const CreatePage = () => {
 					<Typography>Please select a method to create a new wallet</Typography>
 					<Stack spacing={2}>
 						<MethodItem
-							description="Generate a new wallet using a random seed phrase. You can use this seed phrase to recover your wallet."
+							description="Generate a new wallet using a random private key. You can use this private key to recover your wallet."
 							onClick={() => {
 								router.push("/wallet/create/keystore");
 							}}
@@ -50,12 +50,12 @@ const CreatePage = () => {
 							Keystore
 						</MethodItem>
 						<MethodItem
-							description="Generate a new wallet using private key. You can use this private key to recover your wallet."
+							description="Generate a new wallet using a mnemonic passphrase. You can use this mnemonic passphrase to recover your wallet."
 							onClick={() => {
-								router.push("/wallet/create/passphrase");
+								router.push("/wallet/create/mnemonic");
 							}}
 						>
-							Passphrase
+							Mnemonic Passphrase
 						</MethodItem>
 					</Stack>
 				</div>

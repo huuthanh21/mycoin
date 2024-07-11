@@ -2,11 +2,17 @@
 
 import PageContainer from "@/app/(DashboardLayout)/components/container/PageContainer";
 import DashboardCard from "@/app/(DashboardLayout)/components/shared/DashboardCard";
+import { fetchRandomMnemonic } from "@/utils/walletApi";
 import { Button, Grid, TextField, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-const PassphrasePage = () => {
-	const [passphrase, setPassphrase] = useState<string[]>(Array(9).fill(""));
+const MnemonicPage = () => {
+	const [passphrase, setPassphrase] = useState<string[]>(Array(12).fill(""));
+
+	const getRandomPassphrase = async () => {
+		const randomPassphrase = (await fetchRandomMnemonic()).split(" ");
+		setPassphrase(randomPassphrase);
+	};
 
 	const handlePassphraseChange = (index: number, value: string) => {
 		const updatedPassphrase = [...passphrase];
@@ -19,22 +25,27 @@ const PassphrasePage = () => {
 		console.log(passphrase);
 	};
 
+	useEffect(() => {
+		getRandomPassphrase();
+	}, []);
+
 	return (
 		<PageContainer
-			description="Create wallet with Passphrase"
-			title="Passphrase"
+			description="Create wallet with Mnemonic passphrase."
+			title="Mnemonic Passphrase"
 		>
-			<DashboardCard title="Passphrase">
+			<DashboardCard title="Mnemonic Passphrase">
 				<div>
 					<Typography variant="h4">Enter your passphrase</Typography>
 					<Typography variant="subtitle1">
-						Enter your 9 words passphrase to create a new wallet. You can use
+						Enter your 12 words passphrase to create a new wallet. You can use
 						this passphrase to recover your wallet.
 					</Typography>
 					<Grid container spacing={2} sx={{ mb: 2, mt: 2 }}>
 						{passphrase.map((word, index) => (
 							<Grid item key={index} xs={4}>
 								<TextField
+									disabled={true}
 									fullWidth
 									label={`${index + 1}.`}
 									onChange={(e) =>
@@ -45,13 +56,23 @@ const PassphrasePage = () => {
 							</Grid>
 						))}
 						<Grid item xs={12}>
-							<Button
-								color="primary"
-								onClick={handleSubmit}
-								variant="contained"
-							>
-								Create Wallet with Passphrase
-							</Button>
+							<div>
+								<Button
+									color="primary"
+									onClick={getRandomPassphrase}
+									sx={{ mr: 2 }}
+									variant="contained"
+								>
+									Generate Random Passphrase
+								</Button>
+								<Button
+									color="primary"
+									onClick={handleSubmit}
+									variant="contained"
+								>
+									Create Wallet with this Passphrase
+								</Button>
+							</div>
 						</Grid>
 					</Grid>
 					<Typography variant="subtitle1">
@@ -64,4 +85,4 @@ const PassphrasePage = () => {
 	);
 };
 
-export default PassphrasePage;
+export default MnemonicPage;
