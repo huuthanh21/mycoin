@@ -17,9 +17,6 @@ import { useRouter } from "next/navigation";
 import PropTypes from "prop-types";
 import React from "react";
 
-// components
-import Profile from "./Profile";
-
 interface ItemType {
 	toggleMobileSidebar: (event: React.MouseEvent<HTMLElement>) => void;
 }
@@ -79,7 +76,6 @@ const Header = ({ toggleMobileSidebar }: ItemType) => {
 					>
 						{isLoggedIn ? "Logout" : "Access Wallet"}
 					</Button>
-					<Profile />
 				</Stack>
 			</ToolbarStyled>
 		</AppBarStyled>
