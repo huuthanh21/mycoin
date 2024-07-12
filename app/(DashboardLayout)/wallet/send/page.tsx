@@ -2,6 +2,7 @@
 
 import PageContainer from "@/app/(DashboardLayout)/components/container/PageContainer";
 import DashboardCard from "@/app/(DashboardLayout)/components/shared/DashboardCard";
+import ProtectedRoute from "@/app/components/ProtectedRoute";
 import {
 	Alert,
 	Box,
@@ -30,66 +31,72 @@ const SendPage = () => {
 	};
 
 	return (
-		<PageContainer description="this is Send page" title="Send Coin">
-			<DashboardCard title="Send">
-				<div>
-					<form onSubmit={handleSend}>
-						<TextField
-							fullWidth
-							label="Recipient Address"
-							margin="normal"
-							onChange={(e) => setRecipientAddress(e.target.value)}
-							required
-							value={recipientAddress}
-							variant="outlined"
-						/>
-						<Typography align="right" color="textSecondary" variant="subtitle1">
-							Balance: 0
-						</Typography>
-						<TextField
-							InputProps={{
-								startAdornment: (
-									<InputAdornment position="start">MYC</InputAdornment>
-								),
-							}}
-							fullWidth
-							label="Amount"
-							margin="normal"
-							onChange={(e) => setAmount(e.target.value)}
-							required
-							type="number"
-							value={amount}
-							variant="outlined"
-						/>
-						<Box sx={{ mt: 2 }}>
-							<Button
-								color="primary"
-								size="large"
-								startIcon={<IconSend />}
-								type="submit"
-								variant="contained"
+		<ProtectedRoute>
+			<PageContainer description="this is Send page" title="Send Coin">
+				<DashboardCard title="Send">
+					<div>
+						<form onSubmit={handleSend}>
+							<TextField
+								fullWidth
+								label="Recipient Address"
+								margin="normal"
+								onChange={(e) => setRecipientAddress(e.target.value)}
+								required
+								value={recipientAddress}
+								variant="outlined"
+							/>
+							<Typography
+								align="right"
+								color="textSecondary"
+								variant="subtitle1"
 							>
-								Send
-							</Button>
-						</Box>
-					</form>
-					<Snackbar
-						anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
-						autoHideDuration={6000}
-						onClose={() => setOpen(false)}
-						open={open}
-					>
-						<Alert
+								Balance: 0
+							</Typography>
+							<TextField
+								InputProps={{
+									startAdornment: (
+										<InputAdornment position="start">MYC</InputAdornment>
+									),
+								}}
+								fullWidth
+								label="Amount"
+								margin="normal"
+								onChange={(e) => setAmount(e.target.value)}
+								required
+								type="number"
+								value={amount}
+								variant="outlined"
+							/>
+							<Box sx={{ mt: 2 }}>
+								<Button
+									color="primary"
+									size="large"
+									startIcon={<IconSend />}
+									type="submit"
+									variant="contained"
+								>
+									Send
+								</Button>
+							</Box>
+						</form>
+						<Snackbar
+							anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+							autoHideDuration={6000}
 							onClose={() => setOpen(false)}
-							severity="success"
-							sx={{ width: "100%" }}
+							open={open}
 						>
-							Transaction sent successfully!
-						</Alert>
-					</Snackbar>
-				</div>
-			</DashboardCard>
-		</PageContainer>
+							<Alert
+								onClose={() => setOpen(false)}
+								severity="success"
+								sx={{ width: "100%" }}
+							>
+								Transaction sent successfully!
+							</Alert>
+						</Snackbar>
+					</div>
+				</DashboardCard>
+			</PageContainer>
+		</ProtectedRoute>
 	);
 };
 

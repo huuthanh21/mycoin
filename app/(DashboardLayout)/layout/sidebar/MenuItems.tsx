@@ -17,16 +17,19 @@ const Menuitems = [
 		href: "/wallet/create",
 		icon: IconWallet,
 		id: uniqueId(),
+		logout: true,
 		title: "Create Wallet",
 	},
 	{
 		href: "/wallet/access",
 		icon: IconWallet,
 		id: uniqueId(),
+		logout: true,
 		title: "Access Wallet",
 	},
 	{
 		navlabel: true,
+		protected: true,
 		subheader: "Home",
 	},
 
@@ -34,18 +37,21 @@ const Menuitems = [
 		href: "/",
 		icon: IconChartHistogram,
 		id: uniqueId(),
+		protected: true,
 		title: "Portfolio",
 	},
 	{
 		href: "/wallet/send",
 		icon: IconBrandTelegram,
 		id: uniqueId(),
+		protected: true,
 		title: "Send",
 	},
 	{
 		href: "/wallet/transactions",
 		icon: IconHistory,
 		id: uniqueId(),
+		protected: true,
 		title: "Transactions",
 	},
 
@@ -64,22 +70,6 @@ const Menuitems = [
 		icon: IconCopy,
 		id: uniqueId(),
 		title: "Shadow",
-	},
-	{
-		navlabel: true,
-		subheader: "Auth",
-	},
-	{
-		href: "/authentication/login",
-		icon: IconLogin,
-		id: uniqueId(),
-		title: "Login",
-	},
-	{
-		href: "/authentication/register",
-		icon: IconUserPlus,
-		id: uniqueId(),
-		title: "Register",
 	},
 	{
 		navlabel: true,

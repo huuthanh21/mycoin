@@ -1,3 +1,6 @@
+"use client";
+
+import { useAuth } from "@/app/AuthWrapper";
 import {
 	AppBar,
 	Badge,
@@ -10,6 +13,7 @@ import {
 } from "@mui/material";
 import { IconBellRinging, IconMenu } from "@tabler/icons-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import PropTypes from "prop-types";
 import React from "react";
 
@@ -23,6 +27,14 @@ interface ItemType {
 const Header = ({ toggleMobileSidebar }: ItemType) => {
 	// const lgUp = useMediaQuery((theme) => theme.breakpoints.up('lg'));
 	// const lgDown = useMediaQuery((theme) => theme.breakpoints.down('lg'));
+
+	const { isLoggedIn, logout } = useAuth();
+	const router = useRouter();
+
+	const handleLogout = () => {
+		logout();
+		router.push("/wallet/access");
+	};
 
 	const AppBarStyled = styled(AppBar)(({ theme }) => ({
 		backdropFilter: "blur(4px)",
@@ -61,10 +73,11 @@ const Header = ({ toggleMobileSidebar }: ItemType) => {
 						color="primary"
 						component={Link}
 						disableElevation
-						href="/authentication/login"
+						href={isLoggedIn ? "#" : "/wallet/access"}
+						onClick={isLoggedIn ? handleLogout : undefined}
 						variant="contained"
 					>
-						Login
+						{isLoggedIn ? "Logout" : "Access Wallet"}
 					</Button>
 					<Profile />
 				</Stack>

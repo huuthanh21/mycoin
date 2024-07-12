@@ -2,6 +2,7 @@
 
 import PageContainer from "@/app/(DashboardLayout)/components/container/PageContainer";
 import DashboardCard from "@/app/(DashboardLayout)/components/shared/DashboardCard";
+import ProtectedRoute from "@/app/components/ProtectedRoute";
 import { Box, Card, CardContent, IconButton, Typography } from "@mui/material";
 import { IconCopy } from "@tabler/icons-react";
 import React from "react";
@@ -39,26 +40,28 @@ const card = (
 
 const PortfolioPage = () => {
 	return (
-		<PageContainer description="this is Portfolio page" title="Portfolio">
-			<DashboardCard title="My MYC balance">
-				<div>
-					<Card
-						sx={{
-							background: "linear-gradient(45deg, #6a11cb 30%, #2575fc 90%)",
-							borderRadius: 4,
-							color: "white",
-							maxWidth: 300,
-							mb: 2,
-						}}
-					>
-						{card}
-					</Card>
-					<Typography variant="subtitle1">
-						Tip: You can also send your MYC from another wallet!
-					</Typography>
-				</div>
-			</DashboardCard>
-		</PageContainer>
+		<ProtectedRoute>
+			<PageContainer description="this is Portfolio page" title="Portfolio">
+				<DashboardCard title="My MYC balance">
+					<div>
+						<Card
+							sx={{
+								background: "linear-gradient(45deg, #6a11cb 30%, #2575fc 90%)",
+								borderRadius: 4,
+								color: "white",
+								maxWidth: 300,
+								mb: 2,
+							}}
+						>
+							{card}
+						</Card>
+						<Typography variant="subtitle1">
+							Tip: You can also send your MYC from another wallet!
+						</Typography>
+					</div>
+				</DashboardCard>
+			</PageContainer>
+		</ProtectedRoute>
 	);
 };
 

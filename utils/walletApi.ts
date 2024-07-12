@@ -12,4 +12,19 @@ async function fetchRandomMnemonic(): Promise<string> {
 	return data.mnemonic;
 }
 
-export { fetchRandomMnemonic, fetchRandomPrivateKey };
+async function fetchWalletFromPrivateKey(privateKey: string) {
+	const response = await fetch(
+		`${API_ENDPOINT}/wallet/getFromPrivateKey/${privateKey}`
+	);
+	if (!response.ok) {
+		return null;
+	}
+	const data = await response.json();
+	return data as { address: string; stake: number };
+}
+
+export {
+	fetchRandomMnemonic,
+	fetchRandomPrivateKey,
+	fetchWalletFromPrivateKey,
+};
