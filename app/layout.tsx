@@ -1,7 +1,12 @@
 "use client";
+
 import { baselightTheme } from "@/utils/theme/DefaultColors";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect } from "react";
+
+import { AuthWrapper } from "./AuthWrapper";
 
 export default function RootLayout({
 	children,
@@ -11,11 +16,13 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body>
-				<ThemeProvider theme={baselightTheme}>
-					{/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-					<CssBaseline />
-					{children}
-				</ThemeProvider>
+				<AuthWrapper>
+					<ThemeProvider theme={baselightTheme}>
+						{/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+						<CssBaseline />
+						{children}
+					</ThemeProvider>
+				</AuthWrapper>
 			</body>
 		</html>
 	);

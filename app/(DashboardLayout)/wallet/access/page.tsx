@@ -4,7 +4,6 @@ import PageContainer from "@/app/(DashboardLayout)/components/container/PageCont
 import DashboardCard from "@/app/(DashboardLayout)/components/shared/DashboardCard";
 import styled from "@emotion/styled";
 import { Paper, Stack, Typography } from "@mui/material";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 type Props = {
@@ -30,29 +29,29 @@ const MethodItem = ({ children, description, onClick }: Props) => {
 	);
 };
 
-const CreatePage = () => {
+const AccessWalletPage = () => {
 	const router = useRouter();
 	return (
 		<PageContainer
-			description="this is Create Wallet page"
-			title="Create Wallet"
+			description="this is Access Wallet page"
+			title="Access Wallet"
 		>
-			<DashboardCard title="Create Wallet">
+			<DashboardCard title="Access Wallet">
 				<div>
-					<Typography>Please select a method to create a new wallet</Typography>
+					<Typography>Please select a method to access your wallet</Typography>
 					<Stack spacing={2}>
 						<MethodItem
-							description="Generate a new wallet using a random private key. You can use this private key to recover your wallet."
+							description="Access you wallet using a private key."
 							onClick={() => {
-								router.push("/wallet/create/keystore");
+								router.push("/wallet/access/keystore");
 							}}
 						>
 							Keystore
 						</MethodItem>
 						<MethodItem
-							description="Generate a new wallet using a mnemonic passphrase. You can use this mnemonic passphrase to recover your wallet."
+							description="Access you wallet using a mnemonic passphrase."
 							onClick={() => {
-								router.push("/wallet/create/mnemonic");
+								router.push("/wallet/access/mnemonic");
 							}}
 						>
 							Mnemonic Passphrase
@@ -64,4 +63,4 @@ const CreatePage = () => {
 	);
 };
 
-export default CreatePage;
+export default AccessWalletPage;

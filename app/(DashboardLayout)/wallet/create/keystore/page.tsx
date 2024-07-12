@@ -2,33 +2,47 @@
 
 import PageContainer from "@/app/(DashboardLayout)/components/container/PageContainer";
 import DashboardCard from "@/app/(DashboardLayout)/components/shared/DashboardCard";
+import { useAuth } from "@/app/AuthWrapper";
+import {
+	createWalletFromPrivateKey,
+	fetchRandomPrivateKey,
+} from "@/utils/walletApi";
 import { Button, Paper, Typography } from "@mui/material";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const KeystorePage = () => {
+	const { login } = useAuth();
 	const [privateKey, setPrivateKey] = useState("");
 
-	const generatePrivateKey = () => {
-		// Generate random private key with 256 characters
-		const randomPrivateKey = Array(64)
-			.fill(0)
-			.map(() => Math.random().toString(16).substr(2))
-			.join("");
+	const router = useRouter();
 
-		setPrivateKey(randomPrivateKey);
+	const generatePrivateKey = () => {
+		fetchRandomPrivateKey().then((privateKey) => setPrivateKey(privateKey));
 	};
 
 	useEffect(() => {
 		generatePrivateKey();
 	}, []);
 
+	const handleCreateWallet = async () => {
+		const { address } = await createWalletFromPrivateKey(privateKey);
+		login(address, privateKey);
+
+		// Redirect to wallet page
+		router.push("/");
+	};
+
 	return (
-		<PageContainer description="Create wallet with Keystore" title="Keystore">
+		<PageContainer
+			description="Create wallet with Private Key"
+			title="Keystore"
+		>
 			<DashboardCard title="Keystore">
 				<div>
 					<Typography variant="h4">Your Key</Typography>
 					<Typography variant="subtitle1">
-						This is your private key. Keep it safe and do not share it with
+						This is your Private Key. Keep it safe and do not share it with
 						anyone.
 					</Typography>
 					<Paper
@@ -42,8 +56,13 @@ const KeystorePage = () => {
 						Generate Private Key
 					</Button>
 
-					<Button color="primary" sx={{ ml: 2 }} variant="contained">
-						Create Wallet with Keystore
+					<Button
+						color="primary"
+						onClick={handleCreateWallet}
+						sx={{ ml: 2 }}
+						variant="contained"
+					>
+						Create Wallet with this Private Key
 					</Button>
 				</div>
 			</DashboardCard>
