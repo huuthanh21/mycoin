@@ -23,7 +23,14 @@ async function fetchWalletFromPrivateKey(privateKey: string) {
 	return data as { address: string; stake: number };
 }
 
+async function fetchBalance(address: string) {
+	const response = await fetch(`${API_ENDPOINT}/wallet/balance/${address}`);
+	const data = await response.json();
+	return data.balance as number;
+}
+
 export {
+	fetchBalance,
 	fetchRandomMnemonic,
 	fetchRandomPrivateKey,
 	fetchWalletFromPrivateKey,
