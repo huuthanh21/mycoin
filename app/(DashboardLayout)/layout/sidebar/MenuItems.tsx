@@ -20,6 +20,12 @@ const Menuitems = [
 		title: "Create Wallet",
 	},
 	{
+		href: "/wallet/access",
+		icon: IconWallet,
+		id: uniqueId(),
+		title: "Access Wallet",
+	},
+	{
 		navlabel: true,
 		subheader: "Home",
 	},
