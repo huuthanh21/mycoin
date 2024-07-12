@@ -29,7 +29,20 @@ async function fetchBalance(address: string) {
 	return data.balance as number;
 }
 
+async function createWalletFromPrivateKey(privateKey: string) {
+	const response = await fetch(`${API_ENDPOINT}/wallet/createFromPrivateKey`, {
+		body: JSON.stringify({ privateKey }),
+		headers: {
+			"Content-Type": "application/json",
+		},
+		method: "POST",
+	});
+	const data = await response.json();
+	return data as { address: string };
+}
+
 export {
+	createWalletFromPrivateKey,
 	fetchBalance,
 	fetchRandomMnemonic,
 	fetchRandomPrivateKey,
