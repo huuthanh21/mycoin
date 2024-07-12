@@ -23,6 +23,16 @@ async function fetchWalletFromPrivateKey(privateKey: string) {
 	return data as { address: string; stake: number };
 }
 
+async function fetchWalletFromMnemonic(mnemonic: string) {
+	const response = await fetch(
+		`${API_ENDPOINT}/wallet/getFromMnemonic/${mnemonic}`
+	);
+	if (!response.ok) {
+		return null;
+	}
+	const data = await response.json();
+	return data as { address: string; privateKey: string; stake: number };
+}
 async function fetchBalance(address: string) {
 	const response = await fetch(`${API_ENDPOINT}/wallet/balance/${address}`);
 	const data = await response.json();
@@ -59,5 +69,6 @@ export {
 	fetchBalance,
 	fetchRandomMnemonic,
 	fetchRandomPrivateKey,
+	fetchWalletFromMnemonic,
 	fetchWalletFromPrivateKey,
 };
