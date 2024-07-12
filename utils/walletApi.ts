@@ -41,7 +41,20 @@ async function createWalletFromPrivateKey(privateKey: string) {
 	return data as { address: string };
 }
 
+async function createWalletFromMnemonic(mnemonic: string) {
+	const response = await fetch(`${API_ENDPOINT}/wallet/createFromMnemonic`, {
+		body: JSON.stringify({ mnemonic }),
+		headers: {
+			"Content-Type": "application/json",
+		},
+		method: "POST",
+	});
+	const data = await response.json();
+	return data as { address: string; privateKey: string };
+}
+
 export {
+	createWalletFromMnemonic,
 	createWalletFromPrivateKey,
 	fetchBalance,
 	fetchRandomMnemonic,
