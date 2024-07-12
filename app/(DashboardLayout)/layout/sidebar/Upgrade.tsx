@@ -22,11 +22,11 @@ export const Upgrade = () => {
 						Haven&apos;t wallet?
 					</Typography>
 					<Button
-						aria-label="logout"
+						aria-label="login"
 						color="primary"
 						component={Link}
 						disableElevation
-						href="/authentication/register"
+						href="/wallet/create"
 						size="small"
 						target="_blank"
 						variant="contained"

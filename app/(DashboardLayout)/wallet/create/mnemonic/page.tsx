@@ -2,12 +2,20 @@
 
 import PageContainer from "@/app/(DashboardLayout)/components/container/PageContainer";
 import DashboardCard from "@/app/(DashboardLayout)/components/shared/DashboardCard";
-import { fetchRandomMnemonic } from "@/utils/walletApi";
+import { useAuth } from "@/app/AuthWrapper";
+import {
+	createWalletFromMnemonic,
+	fetchRandomMnemonic,
+} from "@/utils/walletApi";
 import { Button, Grid, TextField, Typography } from "@mui/material";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 const MnemonicPage = () => {
+	const { login } = useAuth();
 	const [passphrase, setPassphrase] = useState<string[]>(Array(12).fill(""));
+
+	const router = useRouter();
 
 	const getRandomPassphrase = async () => {
 		const randomPassphrase = (await fetchRandomMnemonic()).split(" ");
@@ -20,9 +28,13 @@ const MnemonicPage = () => {
 		setPassphrase(updatedPassphrase);
 	};
 
-	const handleSubmit = () => {
-		// Handle form submission here
-		console.log(passphrase);
+	const handleSubmit = async () => {
+		// Convert passphrase to string
+		const mnemonic = passphrase.join(" ");
+		const { address, privateKey } = await createWalletFromMnemonic(mnemonic);
+		login(address, privateKey);
+		// Redirect to wallet page
+		router.push("/");
 	};
 
 	useEffect(() => {

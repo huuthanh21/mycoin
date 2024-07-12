@@ -2,12 +2,20 @@
 
 import PageContainer from "@/app/(DashboardLayout)/components/container/PageContainer";
 import DashboardCard from "@/app/(DashboardLayout)/components/shared/DashboardCard";
-import { fetchRandomPrivateKey } from "@/utils/walletApi";
+import { useAuth } from "@/app/AuthWrapper";
+import {
+	createWalletFromPrivateKey,
+	fetchRandomPrivateKey,
+} from "@/utils/walletApi";
 import { Button, Paper, Typography } from "@mui/material";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const KeystorePage = () => {
+	const { login } = useAuth();
 	const [privateKey, setPrivateKey] = useState("");
+
+	const router = useRouter();
 
 	const generatePrivateKey = () => {
 		fetchRandomPrivateKey().then((privateKey) => setPrivateKey(privateKey));
@@ -17,11 +25,13 @@ const KeystorePage = () => {
 		generatePrivateKey();
 	}, []);
 
-	function handleCreateWallet() {
-		// This is a dummy function that does nothing
-		// You can replace this with your own logic
-		console.log("Create Wallet with Private Key");
-	}
+	const handleCreateWallet = async () => {
+		const { address } = await createWalletFromPrivateKey(privateKey);
+		login(address, privateKey);
+
+		// Redirect to wallet page
+		router.push("/");
+	};
 
 	return (
 		<PageContainer
