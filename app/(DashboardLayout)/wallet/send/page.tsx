@@ -2,7 +2,10 @@
 
 import PageContainer from "@/app/(DashboardLayout)/components/container/PageContainer";
 import DashboardCard from "@/app/(DashboardLayout)/components/shared/DashboardCard";
+import { useAuth } from "@/app/AuthWrapper";
 import ProtectedRoute from "@/app/components/ProtectedRoute";
+import { sendTransaction } from "@/utils/transactionApi";
+import { fetchBalance, fetchWalletFromAddress } from "@/utils/walletApi";
 import {
 	Alert,
 	Box,
@@ -13,19 +16,75 @@ import {
 	Typography,
 } from "@mui/material";
 import { IconSend } from "@tabler/icons-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const SendPage = () => {
 	const [recipientAddress, setRecipientAddress] = useState("");
 	const [amount, setAmount] = useState("");
 	const [open, setOpen] = useState(false);
+	const [addressError, setAddressError] = useState<null | string>(null);
+	const [amountError, setAmountError] = useState<null | string>(null);
+	const [balance, setBalance] = useState(0);
 
-	const handleSend = (e: React.FormEvent<HTMLFormElement>) => {
+	const { getPrivateKey, walletAddress } = useAuth();
+
+	useEffect(() => {
+		const updateBalance = async () => {
+			const balance = await fetchBalance(walletAddress!);
+			setBalance(balance);
+		};
+		updateBalance();
+	});
+
+	const validateAddress = async (address: string) => {
+		if (address === walletAddress) {
+			return "Cannot send to your own address";
+		}
+
+		if (!address.startsWith("0x")) {
+			return "Address must start with 0x";
+		}
+
+		const wallet = await fetchWalletFromAddress(address);
+		if (!wallet) {
+			return "Address not found";
+		}
+		return null;
+	};
+
+	const validateAmount = (amount: string) => {
+		if (Number(amount) <= 0) {
+			return "Amount must be greater than 0";
+		}
+
+		if (Number(amount) > balance) {
+			return "Amount exceeds balance";
+		}
+		return null;
+	};
+
+	const handleSend = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		// Here you would typically integrate with a wallet or blockchain
-		console.log("Sending", amount, "to", recipientAddress);
+
+		const addressErr = await validateAddress(recipientAddress);
+		addressErr ? setAddressError(addressErr) : setAddressError(null);
+
+		const amountErr = validateAmount(amount);
+		amountErr ? setAmountError(amountErr) : setAmountError(null);
+
+		if (addressErr || amountErr) {
+			return;
+		}
+
+		await sendTransaction(
+			walletAddress!,
+			recipientAddress,
+			Number(parseFloat(amount).toFixed(8)),
+			getPrivateKey()!
+		);
+
 		setOpen(true);
-		// Reset form
+
 		setRecipientAddress("");
 		setAmount("");
 	};
@@ -37,7 +96,9 @@ const SendPage = () => {
 					<div>
 						<form onSubmit={handleSend}>
 							<TextField
+								error={!!addressError}
 								fullWidth
+								helperText={addressError}
 								label="Recipient Address"
 								margin="normal"
 								onChange={(e) => setRecipientAddress(e.target.value)}
@@ -50,7 +111,7 @@ const SendPage = () => {
 								color="textSecondary"
 								variant="subtitle1"
 							>
-								Balance: 0
+								Balance: {balance} MYC
 							</Typography>
 							<TextField
 								InputProps={{
@@ -58,7 +119,9 @@ const SendPage = () => {
 										<InputAdornment position="start">MYC</InputAdornment>
 									),
 								}}
+								error={!!amountError}
 								fullWidth
+								helperText={amountError}
 								label="Amount"
 								margin="normal"
 								onChange={(e) => setAmount(e.target.value)}
