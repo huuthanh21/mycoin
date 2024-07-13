@@ -3,8 +3,6 @@
 import { baselightTheme } from "@/utils/theme/DefaultColors";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
-import { usePathname, useRouter } from "next/navigation";
-import { useEffect } from "react";
 
 import { AuthWrapper } from "./AuthWrapper";
 

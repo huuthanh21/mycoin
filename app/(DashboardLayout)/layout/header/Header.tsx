@@ -3,7 +3,6 @@
 import { useAuth } from "@/app/AuthWrapper";
 import {
 	AppBar,
-	Badge,
 	Box,
 	Button,
 	IconButton,
@@ -11,7 +10,7 @@ import {
 	Toolbar,
 	styled,
 } from "@mui/material";
-import { IconBellRinging, IconMenu } from "@tabler/icons-react";
+import { IconMenu } from "@tabler/icons-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import PropTypes from "prop-types";
@@ -22,9 +21,6 @@ interface ItemType {
 }
 
 const Header = ({ toggleMobileSidebar }: ItemType) => {
-	// const lgUp = useMediaQuery((theme) => theme.breakpoints.up('lg'));
-	// const lgDown = useMediaQuery((theme) => theme.breakpoints.down('lg'));
-
 	const { isLoggedIn, logout } = useAuth();
 	const router = useRouter();
 

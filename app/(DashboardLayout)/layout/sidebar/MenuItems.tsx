@@ -1,13 +1,7 @@
 import {
-	IconAperture,
 	IconBrandTelegram,
 	IconChartHistogram,
-	IconCopy,
 	IconHistory,
-	IconLogin,
-	IconMoodHappy,
-	IconTypography,
-	IconUserPlus,
 	IconWallet,
 } from "@tabler/icons-react";
 import { uniqueId } from "lodash";
