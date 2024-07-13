@@ -48,10 +48,9 @@ const Menuitems = [
 		title: "Send",
 	},
 	{
-		href: "/wallet/transactions",
+		href: "/transactions",
 		icon: IconHistory,
 		id: uniqueId(),
-		protected: true,
 		title: "Transactions",
 	},
 
