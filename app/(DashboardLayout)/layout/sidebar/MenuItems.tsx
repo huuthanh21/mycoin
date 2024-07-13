@@ -53,39 +53,6 @@ const Menuitems = [
 		id: uniqueId(),
 		title: "Transactions",
 	},
-
-	{
-		navlabel: true,
-		subheader: "Utilities",
-	},
-	{
-		href: "/utilities/typography",
-		icon: IconTypography,
-		id: uniqueId(),
-		title: "Typography",
-	},
-	{
-		href: "/utilities/shadow",
-		icon: IconCopy,
-		id: uniqueId(),
-		title: "Shadow",
-	},
-	{
-		navlabel: true,
-		subheader: "Extra",
-	},
-	{
-		href: "/icons",
-		icon: IconMoodHappy,
-		id: uniqueId(),
-		title: "Icons",
-	},
-	{
-		href: "/sample-page",
-		icon: IconAperture,
-		id: uniqueId(),
-		title: "Sample Page",
-	},
 ];
 
 export default Menuitems;
