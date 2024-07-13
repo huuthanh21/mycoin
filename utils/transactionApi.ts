@@ -23,4 +23,16 @@ async function sendTransaction(
 	};
 }
 
-export { sendTransaction };
+async function fetchAllTransactions() {
+	const response = await fetch(`${API_ENDPOINT}/transaction/getAll`);
+	const data = await response.json();
+	return data as {
+		amount: number;
+		id: number;
+		recipient: string;
+		sender: string;
+		timestamp: string;
+	}[];
+}
+
+export { fetchAllTransactions, sendTransaction };

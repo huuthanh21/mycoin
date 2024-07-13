@@ -2,6 +2,7 @@
 
 import PageContainer from "@/app/(DashboardLayout)/components/container/PageContainer";
 import DashboardCard from "@/app/(DashboardLayout)/components/shared/DashboardCard";
+import { fetchAllTransactions } from "@/utils/transactionApi";
 import DescriptionIcon from "@mui/icons-material/Description";
 import {
 	Box,
@@ -15,27 +16,33 @@ import {
 	TableRow,
 	Typography,
 } from "@mui/material";
-import React from "react";
+import { formatDistanceToNow } from "date-fns";
+import React, { useEffect, useState } from "react";
 
-const transactions = [
-	{
-		amount: "0.16244 MYC",
-		from: "0x95222290...5CC4BAfe5",
-		id: "0x8b0846d8d9...",
-		time: "14 secs ago",
-		to: "0x2112bB05...bF79df5d8",
-	},
-	{
-		amount: "0.324 MYC",
-		from: "0x95222290...5CC4BAfe5",
-		id: "0xf31d995ee3a...",
-		time: "14 secs ago",
-		to: "0x6b75d8AF...0b4009A80",
-	},
-	// Add more transactions as needed
-];
+function timeAgo(dateString: string) {
+	return formatDistanceToNow(new Date(dateString), { addSuffix: true });
+}
 
 const TransactionsPage = () => {
+	const [transactions, setTransactions] = useState<
+		{
+			amount: number;
+			id: number;
+			recipient: string;
+			sender: string;
+			timestamp: string;
+		}[]
+	>([]);
+
+	useEffect(() => {
+		const updateTransactions = async () => {
+			const fetchedTransactions = await fetchAllTransactions();
+			setTransactions(fetchedTransactions);
+		};
+
+		updateTransactions();
+	}, []);
+
 	return (
 		<PageContainer description="this is Transactions page" title="Transactions">
 			<DashboardCard title="Transactions">
@@ -65,18 +72,20 @@ const TransactionsPage = () => {
 													{transaction.id}
 												</Typography>
 												<Typography color="text.secondary" variant="caption">
-													{transaction.time}
+													{timeAgo(transaction.timestamp)}
 												</Typography>
 											</Box>
 										</Box>
 									</TableCell>
 									<TableCell>
 										<Typography variant="body2">
-											From {transaction.from}
+											{transaction.sender}
 										</Typography>
 									</TableCell>
 									<TableCell>
-										<Typography variant="body2">To {transaction.to}</Typography>
+										<Typography variant="body2">
+											{transaction.recipient}
+										</Typography>
 									</TableCell>
 									<TableCell align="right">
 										<Typography fontWeight="bold" variant="body2">
