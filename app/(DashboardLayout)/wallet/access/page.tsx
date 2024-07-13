@@ -3,7 +3,7 @@
 import PageContainer from "@/app/(DashboardLayout)/components/container/PageContainer";
 import DashboardCard from "@/app/(DashboardLayout)/components/shared/DashboardCard";
 import styled from "@emotion/styled";
-import { Paper, Stack, Typography } from "@mui/material";
+import { Paper, Stack, Typography, useTheme } from "@mui/material";
 import { useRouter } from "next/navigation";
 
 type Props = {
@@ -13,14 +13,19 @@ type Props = {
 };
 
 const MethodItem = ({ children, description, onClick }: Props) => {
-	const StyledPaper = styled(Paper)`
-		cursor: pointer;
-		padding: 1rem;
-		text-align: center;
-		&:hover {
-			background-color: #f0f0f0;
-		}
-	`;
+	const theme = useTheme();
+	const StyledPaper = styled(Paper)(() => ({
+		"&:hover": {
+			backgroundColor: theme.palette.primary.main,
+			color: "white",
+		},
+		backgroundColor: "transparent",
+		color: theme.palette.text.primary,
+		cursor: "pointer",
+		padding: theme.spacing(3),
+		textAlign: "center",
+	}));
+
 	return (
 		<StyledPaper onClick={onClick}>
 			<Typography variant="h4">{children}</Typography>
