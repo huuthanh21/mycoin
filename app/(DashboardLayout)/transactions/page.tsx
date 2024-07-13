@@ -45,7 +45,7 @@ const TransactionsPage = () => {
 
 	return (
 		<PageContainer description="this is Transactions page" title="Transactions">
-			<DashboardCard title="Transactions">
+			<DashboardCard title="Latest Transactions">
 				<TableContainer component={Paper}>
 					<Table aria-label="transactions table" sx={{ minWidth: 650 }}>
 						<TableHead>
